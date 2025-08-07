@@ -1,0 +1,14 @@
+
+[package]
+name = "monitoring_rust_app"
+version = "0.1.0"
+edition = "2021"  # ✅ No official "2024" edition as of now. Use 2021.
+
+[dependencies]
+tokio = { version = "1.37", features = ["full"] }
+hyper = { version = "0.14", features = ["server", "http1"] }
+prometheus = "0.13"
+once_cell = "1.19"
+sysinfo = "0.30"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["fmt", "env-filter"] }
