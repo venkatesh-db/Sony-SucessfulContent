@@ -1,0 +1,11 @@
+[package]
+name = "rust_hello_kernel"
+version = "0.1.0"
+edition = "2024"
+
+
+[lib]
+crate-type = ["staticlib"]
+
+[dependencies]
+kernel = { path = "/path/to/linux/rust/kernel" }

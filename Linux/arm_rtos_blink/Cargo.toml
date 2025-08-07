@@ -1,0 +1,17 @@
+
+[package]
+name = "arm_rtos_blink"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+cortex-m = "0.7"
+cortex-m-rt = "0.7"
+panic-halt = "0.2"
+rtic = "2.1.3"
+stm32f4xx-hal = { version = "0.14", features = ["stm32f401", "rt"] }
+
+[profile.release]
+codegen-units = 1
+debug = true
+lto = true
