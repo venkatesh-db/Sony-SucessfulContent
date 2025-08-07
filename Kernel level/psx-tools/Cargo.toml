@@ -1,0 +1,16 @@
+[package]
+name = "psx-tools"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+
+[workspace]
+members = [
+    "cli-runner",
+    "net-tools",
+    "cross-builder",
+    "psx-rpc",
+    "homebrew-utils"
+]
+
