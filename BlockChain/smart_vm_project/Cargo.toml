@@ -1,0 +1,9 @@
+[package]
+name = "smart_vm_project"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+wasmtime = "17.0.0"       # For real WASM execution
+revm = "8.0.0"            # For real EVM execution
+tokio = { version = "1.38", features = ["full"] }  # For async execution
