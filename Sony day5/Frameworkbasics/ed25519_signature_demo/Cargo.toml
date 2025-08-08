@@ -1,0 +1,8 @@
+[package]
+name = "ed25519_signature_demo"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+ed25519-dalek = "1.0.1"
+rand = { version = "0.7.3", features = ["std"] } # ✅ This matches ed25519-dalek's rand_core = 0.5
