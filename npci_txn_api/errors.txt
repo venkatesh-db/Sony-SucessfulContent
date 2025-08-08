@@ -1,0 +1,152 @@
+
+https://chatgpt.com/share/686fb377-2f88-8002-b864-c38822aa0c49
+
+
+
+Errors:
+
+GLIBC mismatches
+
+edition2024 nightly builds
+
+Static vs dynamic linking
+
+rdkafka + cmake + libssl dependencies
+
+Docker multi-stage builds
+
+Architecture (aarch64 vs x86_64) issues
+
+
+Errors::
+
+docker-compose up -d
+
+
+
+Great! You're at the final stage. ✅ Here’s exactly what to do next to **see your application output**, **test Kafka + Postgres integration**, and **confirm everything works**.
+
+---
+
+## ✅ FINAL STEPS TO SEE OUTPUT
+
+---
+
+### 🔁 1. **Rebuild and Start Everything**
+
+Make sure you're in the project folder (with Dockerfile, docker-compose.yml, `.env`):
+
+```bash
+docker compose down -v  # optional: cleans old containers/volumes
+docker compose up --build
+```
+
+> This will build the Rust app, run Postgres + Kafka, and show logs in real time.
+
+---
+
+### 📺 2. **View API Logs and Output**
+
+In another terminal, check logs from your API container:
+
+```bash
+docker logs -f npci_txn_api-api-1
+```
+
+✅ You should **not see panics** if:
+
+* `DATABASE_URL` is valid
+* `KAFKA_BROKERS` is set correctly
+
+You should see something like:
+
+```
+🟢 Connected to Postgres @ db:5432/npci_db
+🟢 Kafka broker found at kafka:9092
+🚀 Server running at 0.0.0.0:8080
+```
+
+---
+
+### 🌐 3. **Test the API (Optional)**
+
+In browser or terminal:
+
+```bash
+curl http://localhost:8088/
+```
+
+Or use Postman to send a test request.
+
+---
+
+### 🐘 4. **View Postgres Tables (from Mac)**
+
+You can connect from host using:
+
+```bash
+psql -h localhost -p 55432 -U postgres -d npci_db
+```
+
+Password: `postgres`
+
+Once connected:
+
+```sql
+\dt   -- list tables
+SELECT * FROM your_table_name;
+```
+
+> If you don’t have `psql`, install it via Homebrew:
+
+```bash
+brew install libpq
+brew link --force libpq
+```
+
+---
+
+### 📡 5. **Kafka Topic Check (Optional)**
+
+To list topics:
+
+```bash
+docker exec -it npci_txn_api-kafka-1 kafka-topics.sh \
+  --bootstrap-server localhost:9092 --list
+```
+
+To create a topic manually (if needed):
+
+```bash
+docker exec -it npci_txn_api-kafka-1 kafka-topics.sh \
+  --bootstrap-server localhost:9092 \
+  --create --topic npci_txn_topic --partitions 1 --replication-factor 1
+```
+
+To produce/consume:
+
+```bash
+# Producer
+docker exec -it npci_txn_api-kafka-1 kafka-console-producer.sh \
+  --broker-list localhost:9092 --topic npci_txn_topic
+
+# Consumer
+docker exec -it npci_txn_api-kafka-1 kafka-console-consumer.sh \
+  --bootstrap-server localhost:9092 --topic npci_txn_topic --from-beginning
+```
+
+---
+
+## 🏁 You’re Done!
+
+If you’ve reached here, then:
+
+* ✅ Docker app is running
+* ✅ Rust compiled without GLIBC or C++ errors
+* ✅ Kafka/Postgres integrated
+* ✅ `.env` config is read correctly
+
+---
+
+Would you like a test Kafka producer/consumer endpoint to verify it from your Rust API?
+Or a health dashboard? Just ask, I’m with you till the end. 💪

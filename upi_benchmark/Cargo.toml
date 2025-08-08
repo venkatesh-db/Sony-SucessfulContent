@@ -1,0 +1,17 @@
+[package]
+name = "upi_benchmark"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+# your real logic can go here
+
+[dev-dependencies]
+criterion = "0.5"
+
+[lib]
+bench = false
+
+[[bench]]
+name = "upi_perf"
+harness = false

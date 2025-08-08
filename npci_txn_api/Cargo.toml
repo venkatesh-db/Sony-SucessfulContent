@@ -1,0 +1,26 @@
+[package]
+name = "npci_txn_api"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+actix-web = "4"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+tokio = { version = "1", features = ["rt-multi-thread", "macros"] }
+dotenv = "0.15"
+
+# ✅ SeaORM with necessary features (macros, uuid, postgres, runtime)
+sea-orm = { version = "0.12", features = ["macros", "uuid", "sqlx-postgres", "runtime-tokio-rustls"] }
+
+# Optional but needed for migrations if used
+sqlx = { version = "0.7", features = ["postgres", "runtime-tokio-rustls", "macros", "uuid"] }
+
+# ✅ Kafka with CMake build support (already okay)
+rdkafka = { version = "0.34", features = ["tokio", "cmake-build"] }
+
+env_logger = "0.10"
+log = "0.4"
+
+# ✅ UUID with serde (important for database + APIs)
+uuid = { version = "1", features = ["v4", "serde"] }
