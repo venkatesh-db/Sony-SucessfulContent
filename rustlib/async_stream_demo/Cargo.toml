@@ -1,0 +1,10 @@
+[package]
+name = "async_stream_demo"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+tokio = { version = "1.40", features = ["full"] }
+futures = "0.3"
+pin-utils = "0.1" # For easy pinning
+
